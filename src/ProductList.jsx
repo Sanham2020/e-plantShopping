@@ -5,6 +5,143 @@ function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
 
+
+
+    const ProductList = () => {
+        const dispatch = useDispatch();
+        const cart = useSelector(state => state.cart.items);
+    
+        // Task: Calculate the total quantity of all items to display in the Navbar icon
+        const calculateTotalQuantity = () => {
+            return cart.reduce((total, item) => total + item.quantity, 0);
+        };
+    
+        const handleAddToCart = (product) => {
+            dispatch(addItem(product));
+        };
+    
+        // Helper to check if a product is already in the cart
+        const isInCart = (productName) => {
+            return cart.some(item => item.name === productName);
+        };
+    
+        return (
+            <div>
+                {/* Example Navbar integration */}
+                <nav className="navbar">
+                    <div className="cart-icon">
+                        Cart Items: {calculateTotalQuantity()}
+                    </div>
+                </nav>
+    
+                <div className="product-grid">
+                    {plantsArray.map((plant) => (
+                        <div key={plant.name} className="product-card">
+                            <img src={plant.image} alt={plant.name} />
+                            <h3>{plant.name}</h3>
+                            <p>{plant.cost}</p>
+                            <button 
+                                className={`add-to-cart-btn ${isInCart(plant.name) ? 'disabled' : ''}`}
+                                disabled={isInCart(plant.name)}
+                                onClick={() => handleAddToCart(plant)}
+                            >
+                                {isInCart(plant.name) ? 'Added to Cart' : 'Add to Cart'}
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const plantsArray = [
         {
             category: "Air Purifying Plants",
